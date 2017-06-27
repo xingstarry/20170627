@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			background: #000;
+		}
+		canvas{
+			background: #fff;
+		}
+	</style>
+	<script type="text/javascript">
+		
+		window.onload = function () {
+			var oC = document.getElementById('c1');
+			var gd = oC.getContext('2d');
+			var oImg = new Image();
+			oImg.src = 'img/20110222_14.png';
+
+			var n = 0;
+			var m = 0;
+			var o = 0;
+			// gd.drawImage(图片源, sx, sy ,sw, sh, dx, dy, dw, dh);
+			setInterval(function(){
+				gd.clearRect(0,0,oC.width,oC.height);
+				if(m<oC.height-165 && o <= 0){
+					gd.drawImage(oImg,n*40,0,40,55,o,m,120,165);
+					m+=10;
+				}else if(m>=oC.height-165 && o<oC.width-120){
+					m = oC.height-165;
+					gd.drawImage(oImg,n*40,110,40,55,o,m,120,165);
+					o+=20;
+				}else if(o>=oC.width-120 && m>0){
+					o = oC.width-120;
+					gd.drawImage(oImg,n*40,165,40,55,o,m,120,165);
+					m-=10;
+				}else if(m <=0 && o>0){
+					gd.drawImage(oImg,n*40,55,40,55,o,m,120,165);
+					o-=20;
+				}
+				gd.stroke();
+				n++;
+				if(n==4){
+					n = 0;
+				}
+				
+			}, 20);
+		}
+
+	</script>
+</head>
+<body>
+	<canvas width="800" height="600"  id="c1">
+		<span></span>
+	</canvas>
+</body>
+</html>
